@@ -1,0 +1,25 @@
+{
+  "name": "Ghost Theme Starter",
+  "version": "0.0.0",
+  "description": "Ghost Theme Starter is a repo to make it easy to get start creating a new theme for the Ghost blogging platform.",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "keywords": [
+    "ghost",
+    "theme",
+    "blog"
+  ],
+  "author": "Luke Jernejcic",
+  "license": "Copyright (c) 2013 Luke Jernejcic",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-sass": "~0.7.2",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-cssmin": "~0.8.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-cssmin": "~0.9.0"
+  }
+}

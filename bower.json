@@ -1,0 +1,27 @@
+{
+  "name": "Ghost Theme Starter",
+  "version": "0.0.1",
+  "authors": [
+    "Luke Jernejcic <ljernejcic@gmail.com>"
+  ],
+  "description": "Ghost Theme Starter is a repo to make it easy to get start creating a new theme for the Ghost blogging platform.",
+  "keywords": [
+    "blogging",
+    "ghost",
+    "theme"
+  ],
+  "license": "MIT",
+  "homepage": "http://jernejcic.com",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "twbs/bootstrap-sass#~3.1.1",
+    "modernizr": "~2.7.2"
+  }
+}

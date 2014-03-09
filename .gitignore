@@ -1,15 +1,18 @@
 lib-cov
 *.seed
 *.log
+*.css
 *.csv
 *.dat
 *.out
 *.pid
 *.gz
+*.swp
 
 pids
 logs
 results
 
+bower_components
 npm-debug.log
 node_modules

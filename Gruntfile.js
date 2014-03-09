@@ -46,6 +46,15 @@ module.exports = function(grunt) {
     'sass:dist'
   ]);
 
+  grunt.registerTask('init', function() {
+    if (grunt.file.exists('theme/assets/css/screen.custom.scss') === false) {
+      grunt.file.write('theme/assets/css/screen.custom.scss', '/* Put your custom SCSS in here. */');
+    }
+    if (grunt.file.exists('theme/assets/css/post.custom.scss') === false) {
+      grunt.file.write('theme/assets/css/post.custom.scss');
+    }
+  });
+
   grunt.registerTask('server', function (target) {
     grunt.task.run([
       'sass:dev',

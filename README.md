@@ -57,7 +57,7 @@ Built as `post.css`.
 
 This file should not be linked to in the theme. It is pulled into the `screen.css` file during compilation.
 
-This file should contain all styling directly related to how text inside of a post will look on the page. Ghost currently has plans to allow dynamic styling in the post eidtor and will use this file.
+This file should contain all styling directly related to how text inside of a post will look on the page. Ghost currently has plans to allow dynamic styling in the post editor and will use this file.
 
 ## Dependencies
 

@@ -18,7 +18,8 @@ module.exports = function(grunt) {
     sass: {
       dist: {
         files: {
-          'hover/assets/css/screen.css': 'hover/assets/css/screen.scss'
+          'theme/assets/css/post.css': 'theme/assets/css/post.css',
+          'theme/assets/css/screen.css': 'theme/assets/css/screen.scss'
         },
         options: {
           style: 'compressed'
@@ -26,7 +27,8 @@ module.exports = function(grunt) {
       },
       dev: {
         files: {
-          'hover/assets/css/screen.css': 'hover/assets/css/screen.scss'
+          'theme/assets/css/post.css': 'theme/assets/css/post.scss',
+          'theme/assets/css/screen.css': 'theme/assets/css/screen.scss'
         },
         options: {
           style: 'expanded',

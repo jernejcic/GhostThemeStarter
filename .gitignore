@@ -3,6 +3,7 @@ lib-cov
 *.log
 *.css
 *.csv
+*.custom.scss
 *.dat
 *.out
 *.pid

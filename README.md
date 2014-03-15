@@ -1,16 +1,21 @@
 GhostThemeStarter
 =================
 
-Ghost Theme Starter is a repo to make it easy to get start creating a new theme for the Ghost blogging platform.
+Ghost Theme Starter is a repo to make it easy to get start creating a new theme for the Ghost blogging platform. The purpose it to create a bank canvas to experience Ghost theme designers to start from and to have enough functionaly built in that a designers new to Ghost can get started without having to learn a ton about the platform first.
 
 ## Table of Content
 
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Tools](#tools)
 - [CSS](#css)
 - [Dependendices](#dependencies)
 - [Documentation](#documentaiton)
 - [Copyright and License](#copyright-and-license)
+
+## Requirements
+
+You to have `Ruby` installed for SASS compilation.
 
 ## Installation
 
@@ -20,10 +25,14 @@ Clone the repository from:
 
 Then install the dependencies using:
 
+    cd GhostThemeStarter
+    gem install sass
     npm install
     bower install
     grunt init
+    cp settings.example.json settings.json
 
+Now update your settings.json for the addins that you would like. If you do not want to use an addin, then remove it.
 
 ## Tools
 
@@ -46,6 +55,10 @@ To manually build your CSS in expanded formatting use:
 To manually build your CSS files in compressed format use:
 
     grunt sass:dist
+
+## settings.json
+
+You can remove any key/value from this JSON file if you do not want the corresponding service file to be created.
 
 ## CSS
 

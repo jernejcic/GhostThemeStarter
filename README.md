@@ -1,23 +1,27 @@
-GhostThemeStarter
-=================
+Ghost Theme Starter
+===================
 
 Ghost Theme Starter is a repo to make it easy to get start creating a new theme for the Ghost blogging platform. The purpose it to create a bank canvas to experience Ghost theme designers to start from and to have enough functionaly built in that a designers new to Ghost can get started without having to learn a ton about the platform first.
 
-## Table of Content
+Table of Content
+----------------
 
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Tools](#tools)
+- [settings.json](#settings.json)
 - [CSS](#css)
 - [Dependendices](#dependencies)
 - [Documentation](#documentaiton)
 - [Copyright and License](#copyright-and-license)
 
-## Requirements
+Requirements
+------------
 
-You to have `Ruby` installed for SASS compilation.
+You need to have `Ruby` installed for SASS compilation.
 
-## Installation
+Installation
+------------
 
 Clone the repository from:
 
@@ -30,11 +34,21 @@ Then install the dependencies using:
     npm install
     bower install
     grunt init
-    cp settings.example.json settings.json
 
-Now update your settings.json for the addins that you would like. If you do not want to use an addin, then remove it.
+Now update `theme/settings.json` with the desired setup you would like. If you do not want to use a feature, then remove its value from the settings. See [Settings](#settings.json) below for more info.
 
-## Tools
+After configuring your settings run:
+
+    grunt create
+
+At this point you have a fully functional--though very simple--theme. You will find it in the `theme` folder. It would be suitable to use in a blog functionality wise.
+
+The optional last step is to build a compressed version of the theme. This minifies the CSS and HTML and drops the theme in it's own folder with the name that you put in the `theme/settings.json` file. It is perfect to dropping into a live Ghost blog. Run this command to create it:
+
+    grunt build
+
+Tools
+-----
 
 When in development you use the following command to build your CSS. It will initiate a service to watch for changes SCSS files and automatically recompile them for you.
 
@@ -56,11 +70,13 @@ To manually build your CSS files in compressed format use:
 
     grunt sass:dist
 
-## settings.json
+settings.json
+-------------
 
 You can remove any key/value from this JSON file if you do not want the corresponding service file to be created.
 
-## CSS
+CSS
+---
 
 The CSS files are built in "expanded" mode during development and are compressed when built using `grunt build`.
 
@@ -89,7 +105,8 @@ If you get an error when you first try to compile the SCSS, make sure that you c
 - theme/assets/css/screen.custom.scss
 - theme/assets/css/post.custom.scss
 
-## Dependencies
+Dependencies
+------------
 
 ### Node
 
@@ -104,10 +121,12 @@ If you get an error when you first try to compile the SCSS, make sure that you c
 - bootstrap-sass
 - modernizr
 
-## Documentation
+Documentation
+-------------
 
 For more details on creating Ghost themes, you can find the official documentation at [http://docs.ghost.org/themes/](http://docs.ghost.org/themes/).
 
-## Copyright and License
+Copyright and License
+---------------------
 
 Released under the [MIT license](LICENSE).

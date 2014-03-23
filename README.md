@@ -37,7 +37,7 @@ Then install the dependencies using:
 
 Now update `theme/settings.json` with the desired setup you would like. If you do not want to use a feature, then remove its value from the settings. See [Settings](#settings.json) below for more info.
 
-After configuring your settings run:
+After configuring the settings run:
 
     grunt create
 
@@ -50,23 +50,23 @@ The optional last step is to build a compressed version of the theme. This minif
 Tools
 -----
 
-When in development you use the following command to build your CSS. It will initiate a service to watch for changes SCSS files and automatically recompile them for you.
+When in development you use the following command to build the CSS. It will initiate a service to watch for changes SCSS files and automatically recompile them for you.
 
     grunt server
 
-When you read to build your theme for distribution, run the following command. It will compress your CSS files for you.
+When you need to build the theme for distribution, run the following command. It will compress the CSS files for you.
 
     grunt build
 
-When creating a new project, you can run this command to create your custom SCSS files:
+When creating a new project, you can run this command to create the custom SCSS files:
 
     grunt init
 
-To manually build your CSS in expanded formatting use:
+To manually build the CSS in expanded formatting use:
 
     grunt sass:dev
 
-To manually build your CSS files in compressed format use:
+To manually build the CSS files in compressed format use:
 
     grunt sass:dist
 
@@ -75,6 +75,18 @@ settings.json
 
 You can remove any key/value from this JSON file if you do not want the corresponding service file to be created.
 
+### THEME_NAME
+
+### THEME_FOLDER
+
+This is automatically create from the `THEME_NAME`. It can be overriden by adding it into the `theme/settings.json` file.
+
+### DISQUS_SHORTNAME
+
+### GOOGLE_ANALYTICS_CODE
+
+### GOOGLE_ANALYTICS_DOMAIN
+
 CSS
 ---
 
@@ -82,15 +94,11 @@ The CSS files are built in "expanded" mode during development and are compressed
 
 ### screen.scss
 
-This file should not be edited when making a theme. Instead put your CSS in screen.custom.scss.
-
 Built as `screen.css`.
 
 This is the main CSS file used on the front it. It links to the other SCSS files to build the master CSS file for the front-end.
 
 ### post.scss
-
-This file should not be edited when making a theme. Instead put your CSS in the `post.custom.scss`.
 
 Built as `post.css`.
 

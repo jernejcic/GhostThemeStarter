@@ -1,6 +1,7 @@
 {
-  'THEME_NAME': 'mytheme',
-  'DISQUS_SHORTNAME': 'example',
-  'GOOGLE_ANALYTICS_CODE': 'UA-XXXXXXX-XX',
-  'GOOGLE_ANALYTICS_DOMAIN': 'example.com'
+  "THEME_NAME": "mytheme",
+  "DISQUS_SHORTNAME": "example",
+  "GOOGLE_ANALYTICS_CODE": "UA-XXXXXXX-XX",
+  "GOOGLE_ANALYTICS_DOMAIN": "example.com"
 }
+

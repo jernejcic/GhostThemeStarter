@@ -1,19 +1,31 @@
 module.exports = function(grunt) {
   var settings;
   var themeFolder;
-  if (grunt.file.exists('theme/settings.json')) {
-    settings = grunt.file.readJSON('theme/settings.json');
-    if (typeof settings.THEME_FOLDER === 'undefined' || settings.THEME_FOLDER.length === 0) {
-      settings.THEME_FOLDER = settings.THEME_NAME.replace(/[\W\.]+/g, "");
-    }
-    themeFolder = settings.THEME_FOLDER;
-  }
+
   var defaultSettings = {
     'THEME_NAME': 'mytheme',
     'DISQUS_SHORTNAME': 'example',
     'GOOGLE_ANALYTICS_CODE': 'UA-XXXXXXX-XX',
     'GOOGLE_ANALYTICS_DOMAIN': 'example.com'
   };
+
+  if (grunt.file.exists('theme/settings.json')) {
+    settings = grunt.file.readJSON('theme/settings.json');
+
+    if (typeof settings.THEME_FOLDER === 'undefined' || settings.THEME_FOLDER.length === 0) {
+      settings.THEME_FOLDER = settings.THEME_NAME.replace(/[\W\.]+/g, "");
+    }
+    themeFolder = settings.THEME_FOLDER;
+
+    settings.hasGoogleAnalytics = typeof settings.GOOGLE_ANALYTICS_CODE !== 'undefined'
+        && settings.GOOGLE_ANALYTICS_CODE !== null
+        && typeof settings.GOOGLE_ANALYTICS_DOMAIN !== 'undefined'
+        && settings.GOOGLE_ANALYTICS_CODE !== defaultSettings.GOOGLE_ANALYTICS_CODE
+        && settings.GOOGLE_ANALYTICS_DOMAIN !== defaultSettings.GOOGLE_ANALYTICS_DOMAIN;
+
+    settings.hasDisqus = typeof settings.DISQUS_SHORTNAME !== 'undefined'
+        && settings.DISQUS_SHORTNAME !== defaultSettings.DISQUS_SHORTNAME;
+  }
 
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -33,16 +45,47 @@ module.exports = function(grunt) {
             dest: 'theme/',
             filter: function(filepath) {
               var path = require('path');
+              // Setup our target path.
               var dest = path.join(
                 'theme',
-                // Remove the parent 'js/src' from filepath
+                // Remove the parent source directory from filepath
                 filepath.split(path.sep).slice(1).join(path.sep)
               );
-              grunt.log.writeln('checking if file exists: source=' + filepath + ' || dest=' + dest);
+
+              // Don't copy analytics partial if it is not setup in the settings.
+              if (filepath.indexOf('partials/gauniversal.hbs') > -1
+                  && !settings.hasGoogleAnalytics) {
+                grunt.log.writeln('Skipping anlytics partials: not setup in the settings.json.');
+                return false;
+              }
+              if (filepath.indexOf('partials/disqus.hbs') > -1
+                  && !settings.hasDisqus) {
+                grunt.log.writeln('Skipping Disqus partial: not setup in theme/settigns.json.');
+                return false;
+              }
+
               return !(grunt.file.exists(dest));
             }
           }
-        ]
+        ],
+        options: {
+          process: function(content, srcpath) {
+            if (srcpath.indexOf('partials/gauniversal.hbs') > -1) {
+              grunt.log.writeln('Processing file: ' + srcpath);
+              return content
+                  .replace('[GOOGLEANALYTICSCODE]', settings.GOOGLE_ANALYTICS_CODE)
+                  .replace('[GOOGLEANALYTICSDOMAIN]', settings.GOOGLE_ANALYTICS_DOMAIN);
+            }
+            if (srcpath.indexOf('partials/disqus.hbs') > -1) {
+              grunt.log.writeln('Processing file: ' + srcpath);
+              return content
+                  .replace('[DISQUSSHORTNAME]', settings.DISQUS_SHORTNAME);
+            }
+
+            return content;
+          }
+        }
+
       },
       dist: {
         files: [
@@ -128,29 +171,9 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('updateThemePartials', 'Create the development theme folder.', ['copy:create', function() {
-
-    //grunt.task.requires(copy:create');
-
-    if (grunt.file.exists('theme/partials/analytics.hbs') === false
-        && typeof settings.GOOGLE_ANALYTICS_CODE !== 'undefined'
-        && typeof settings.GOOGLE_ANALYTICS_DOMAIN !== 'undefined'
-        && settings.GOOGLE_ANALYTICS_CODE !== defaultSettings.GOOGLE_ANALYTICS_CODE
-        && settings.GOOGLE_ANALYTICS_DOMAIN !== defaultSettings.GOOGLE_ANALYTICS_DOMAIN) {
-      grunt.log.writeln('Creating partial for Google Analytics.');
-    } else { grunt.log.writeln('Skipping Google Analytics partial creation.'); }
-
-    if (grunt.file.exists('theme/partials/disqus.hbs') === false
-        && typeof settings.DISQUS_SHORTNAME !== 'undefined'
-        && settings.DISQUS_SHORTNAME !== settingsDefault.DISQUS_SHORTNAME) {
-      grunt.log.writeln('Creating partial for Disqus comments');
-    } else { grunt.log.writeln('Skipping Disqus partial creation.'); }
-  }]);
-
   grunt.registerTask('create', [
     'checkReadyForCreate',
-    'copy:create',
-    'updateThemePartials'
+    'copy:create'
   ]);
 
   grunt.registerTask('server', function (target) {

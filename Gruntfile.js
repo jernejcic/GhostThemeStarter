@@ -81,6 +81,14 @@ module.exports = function(grunt) {
               return content
                   .replace('[DISQUSSHORTNAME]', settings.DISQUS_SHORTNAME);
             }
+            if (srcpath.indexOf('default.hbs') > -1 && settings.hasGoogleAnalytics) {
+              return content
+                  .replace('{{!> gauniversal}}', '{{> gauniversal}}');
+            }
+            if (srcpath.indexOf('post.hbs') > -1 && settings.hasDisqus) {
+              return content
+                  .replace('{{!> disqus}}', '{{> disqus}}');
+            }
 
             return content;
           }
